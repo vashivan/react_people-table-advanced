@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Person } from '../types';
 
 export default function PersonLink({
@@ -8,6 +8,8 @@ export default function PersonLink({
   person: Person | undefined;
   name: string | null;
 }) {
+  const [searchParams] = useSearchParams();
+
   if (!name) {
     return <span>-</span>;
   }
@@ -18,7 +20,10 @@ export default function PersonLink({
     return (
       <Link
         className={person.sex === 'f' ? 'has-text-danger' : ''}
-        to={`/people/${person.slug}`}
+        to={{
+          pathname: `/people/${person.slug}`,
+          search: searchParams.toString(),
+        }}
       >
         {name}
       </Link>

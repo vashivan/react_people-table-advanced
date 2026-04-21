@@ -23,8 +23,8 @@ const getFilteredPeople = (people: Person[], searchParams: URLSearchParams) => {
 
       return (
         person.name.toLowerCase().includes(query) ||
-        person.motherName?.toLowerCase().includes(query) ||
-        person.fatherName?.toLowerCase().includes(query)
+        (person.motherName || '').toLowerCase().includes(query) ||
+        (person.fatherName || '').toLowerCase().includes(query)
       );
     })
     .filter(person => {
